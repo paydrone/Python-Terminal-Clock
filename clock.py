@@ -4,11 +4,13 @@ import time
 import os
 import datetime
 import ctypes
+import platform
 
-ctypes.windll.kernel32.SetConsoleTitleA("Python Clock")
-
-#Changes terminal size
-os.system("mode con: cols=90 lines=11")
+opsys = platform.platform()
+if opsys  == 'Windows':
+     ctypes.windll.kernel32.SetConsoleTitleA("Python Clock")
+     #Changes terminal size
+     os.system("mode con: cols=90 lines=11")
 
 list = [
 '''
@@ -115,7 +117,12 @@ $$\\
 
 done = True
 while(done):
-    os.system('cls')
+
+    if opsys == 'Windows':
+         os.system('cls')
+    else:
+        print "\n"*15
+
     ti = str(datetime.datetime.now())
     ti = ti[11:19]
 
